@@ -30,12 +30,30 @@
                 <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'core:about' %}">Timeline</a>
                 </li>
-                <li class="nav-item ms-lg-2">
-                    <a class="btn btn-primary btn-sm nav-cta" href="{% url 'contacts:contact' %}">
-                        Contact Me
-                        <i class="bi bi-arrow-right-short" aria-hidden="true"></i>
-                    </a>
-                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item ms-lg-2">
+                        <span class="nav-user">
+                            <i class="bi bi-person-check" aria-hidden="true"></i>
+                            {{ request.user.get_short_name|default:request.user.username }}
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <form class="logout-form" method="post" action="{% url 'accounts:logout' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-primary btn-sm" type="submit">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'accounts:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-sm nav-cta" href="{% url 'accounts:signup' %}">
+                            Sign Up
+                            <i class="bi bi-arrow-right-short" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
