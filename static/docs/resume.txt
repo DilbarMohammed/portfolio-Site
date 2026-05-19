@@ -1,0 +1,19 @@
+Your Name
+Full Stack Developer
+
+Email: hello@example.com
+Phone: +1 555 0100
+Location: Remote
+
+Profile
+I design and build polished web products with clean interfaces, reliable backends, and thoughtful user experiences.
+
+Skills
+- Frontend: HTML, CSS, JavaScript, Bootstrap, responsive UI
+- Backend: Python, Django, Django Admin, SQLite, REST patterns
+- Tools: Git, GitHub, VS Code, deployment-ready settings
+
+Selected Experience
+- Full Stack Developer: Built responsive Django applications with database-backed forms and admin dashboards.
+- Computer Science Student: Developed foundations in programming, databases, and web systems.
+- Certification: Django and modern web development practice.

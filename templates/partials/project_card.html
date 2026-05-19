@@ -1,0 +1,32 @@
+{% load static %}
+<article class="project-card reveal" data-tech="{{ project.tech_stack|lower }}">
+    <a class="project-image" href="{{ project.live_url|default:project.github_url|default:'#' }}" aria-label="{{ project.title }}">
+        <img src="{% static project.image %}" alt="{{ project.title }} project preview" loading="lazy">
+    </a>
+    <div class="project-body">
+        <div class="project-title-row">
+            <h3>{{ project.title }}</h3>
+            {% if project.featured %}<span class="featured-pill">Featured</span>{% endif %}
+        </div>
+        <p>{{ project.summary }}</p>
+        <div class="tech-stack">
+            {% for tech in project.tech_list %}
+                <span>{{ tech }}</span>
+            {% endfor %}
+        </div>
+        <div class="project-actions">
+            {% if project.github_url %}
+                <a class="btn btn-outline-primary btn-sm" href="{{ project.github_url }}" target="_blank" rel="noopener">
+                    <i class="bi bi-github" aria-hidden="true"></i>
+                    GitHub
+                </a>
+            {% endif %}
+            {% if project.live_url %}
+                <a class="btn btn-primary btn-sm" href="{{ project.live_url }}" target="_blank" rel="noopener">
+                    <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                    Live Demo
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</article>

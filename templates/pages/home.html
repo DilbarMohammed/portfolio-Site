@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="hero-section" id="home">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <p class="eyebrow reveal">Available for selected work</p>
+                <h1 class="hero-title reveal reveal-delay-1">
+                    Hi, I am <span>{{ site_name }}</span>.
+                </h1>
+                <p class="hero-role reveal reveal-delay-2">
+                    <span data-typing="{{ site_tagline }},Django Developer,UI Engineer,Product-minded Builder">{{ site_tagline }}</span>
+                </p>
+                <p class="hero-lead reveal reveal-delay-3">{{ portfolio_intro }}</p>
+                <div class="hero-actions reveal reveal-delay-4">
+                    <a class="btn btn-primary btn-lg" href="{% url 'core:projects' %}">
+                        View Projects
+                        <i class="bi bi-arrow-right-short" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-outline-primary btn-lg" href="{% url 'contacts:contact' %}">Contact Me</a>
+                </div>
+                <div class="hero-proof reveal reveal-delay-4" aria-label="Highlights">
+                    <span><i class="bi bi-code-slash"></i> Full stack delivery</span>
+                    <span><i class="bi bi-palette"></i> Clean UI systems</span>
+                    <span><i class="bi bi-lightning-charge"></i> Fast, responsive builds</span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="profile-card reveal">
+                    <div class="profile-orbit" aria-hidden="true">
+                        <span class="orbit-node node-one"></span>
+                        <span class="orbit-node node-two"></span>
+                        <span class="orbit-node node-three"></span>
+                    </div>
+                    <div class="profile-avatar">{{ site_name|first|default:"P" }}</div>
+                    <h2>{{ site_name }}</h2>
+                    <p>{{ site_tagline }}</p>
+                    <div class="profile-meta">
+                        <span><i class="bi bi-geo-alt"></i>{{ portfolio_location }}</span>
+                        <span><i class="bi bi-envelope"></i>{{ portfolio_email }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad" id="about">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 reveal">
+                <p class="eyebrow">About me</p>
+                <h2 class="section-title">I turn ideas into polished, maintainable web experiences.</h2>
+                <p class="section-copy">
+                    I work across frontend, backend, and product detail, combining clean interfaces with durable Django architecture and practical delivery habits.
+                </p>
+                <p class="section-copy">
+                    My focus is simple: build software that looks sharp, feels fast, and stays understandable for the people who maintain it.
+                </p>
+                <div class="about-actions">
+                    <a class="btn btn-primary" href="{% static 'docs/resume.txt' %}" download>
+                        <i class="bi bi-download" aria-hidden="true"></i>
+                        Download Resume
+                    </a>
+                    <a class="btn btn-outline-primary" href="{% url 'core:about' %}">View Timeline</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="highlight-grid">
+                    <article class="highlight-card reveal">
+                        <i class="bi bi-window-stack"></i>
+                        <h3>Frontend craft</h3>
+                        <p>Responsive layouts, accessible components, and precise interaction states.</p>
+                    </article>
+                    <article class="highlight-card reveal">
+                        <i class="bi bi-server"></i>
+                        <h3>Backend depth</h3>
+                        <p>Django apps, database models, forms, admin workflows, and clean routing.</p>
+                    </article>
+                    <article class="highlight-card reveal">
+                        <i class="bi bi-kanban"></i>
+                        <h3>Product thinking</h3>
+                        <p>Practical decisions that balance user experience, maintainability, and speed.</p>
+                    </article>
+                    <article class="highlight-card reveal">
+                        <i class="bi bi-shield-check"></i>
+                        <h3>Production habits</h3>
+                        <p>Environment-aware settings, tested flows, and deployment-friendly structure.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad section-muted" id="skills">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="eyebrow">Skills</p>
+            <h2>Tools I use to build modern products</h2>
+            <p>Admin-managed skill cards with animated progress bars and category grouping.</p>
+        </div>
+        <div class="row g-4">
+            {% for category, skills in skills_by_category.items %}
+                <div class="col-lg-4">
+                    <article class="skill-panel reveal">
+                        <h3>{{ category }}</h3>
+                        <div class="skill-list">
+                            {% for skill in skills %}
+                                <div class="skill-item">
+                                    <div class="skill-topline">
+                                        <span><i class="bi {{ skill.icon_class|default:'bi-circle' }}"></i>{{ skill.name }}</span>
+                                        <strong>{{ skill.proficiency }}%</strong>
+                                    </div>
+                                    <div class="progress skill-progress" role="progressbar" aria-label="{{ skill.name }}" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" data-progress="{{ skill.proficiency }}"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section-pad" id="projects">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="eyebrow">Featured work</p>
+            <h2>Selected projects with clean interfaces and solid backends</h2>
+            <p>Each project card is editable from Django Admin, including image, stack, GitHub, and live demo links.</p>
+        </div>
+        <div class="row g-4">
+            {% for project in projects %}
+                <div class="col-md-6">
+                    {% include "partials/project_card.html" with project=project %}
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p class="empty-state">Add projects in Django Admin to feature them here.</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a class="btn btn-outline-primary btn-lg" href="{% url 'core:projects' %}">See All Projects</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad section-muted" id="experience">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="eyebrow">Timeline</p>
+            <h2>Experience, education, and certifications</h2>
+        </div>
+        <div class="timeline">
+            {% for item in experience %}
+                <article class="timeline-item reveal">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-card">
+                        <span class="timeline-type">{{ item.get_type_display }}</span>
+                        <h3>{{ item.title }}</h3>
+                        <p class="timeline-meta">{{ item.organization }}{% if item.location %} | {{ item.location }}{% endif %}</p>
+                        <p>{{ item.description }}</p>
+                        <strong>{{ item.period }}{% if item.is_current %} | Current{% endif %}</strong>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section-pad" id="contact">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-5 reveal">
+                <p class="eyebrow">Contact</p>
+                <h2 class="section-title">Have a project, role, or collaboration in mind?</h2>
+                <p class="section-copy">Send a message and I will get back with a clear next step.</p>
+                <div class="contact-links">
+                    <a href="mailto:{{ portfolio_email }}"><i class="bi bi-envelope"></i>{{ portfolio_email }}</a>
+                    <a href="tel:{{ portfolio_phone }}"><i class="bi bi-telephone"></i>{{ portfolio_phone }}</a>
+                    <a href="{{ portfolio_github }}" target="_blank" rel="noopener"><i class="bi bi-github"></i>GitHub</a>
+                    <a href="{{ portfolio_linkedin }}" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i>LinkedIn</a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                {% include "partials/contact_form.html" with form=contact_form %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-shell">
+            <div>
+                <a class="footer-brand d-inline-flex align-items-center gap-2" href="{% url 'core:home' %}">
+                    <span class="brand-mark">{{ site_name|first|default:"P" }}</span>
+                    <span>{{ site_name }}</span>
+                </a>
+                <p class="footer-copy mt-3 mb-0">{{ site_tagline }} building thoughtful digital products.</p>
+            </div>
+            <div class="social-links" aria-label="Social links">
+                <a href="{{ portfolio_github }}" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                <a href="{{ portfolio_linkedin }}" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="{{ portfolio_x }}" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+                <a href="mailto:{{ portfolio_email }}" aria-label="Email"><i class="bi bi-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; {{ current_year }} {{ site_name }}. All rights reserved.</span>
+            <span>Built with Django and Bootstrap 5.</span>
+        </div>
+    </div>
+</footer>

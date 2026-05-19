@@ -1,0 +1,40 @@
+:root {
+    --primary: #07111f;
+    --secondary: #0d1b2f;
+    --accent: #22d3ee;
+    --primary-fg: #ffffff;
+    --body-bg: #f6f8fb;
+    --body-fg: #111827;
+    --link-fg: #0369a1;
+    --link-hover-color: #0891b2;
+    --header-bg: #07111f;
+    --header-color: #ffffff;
+    --breadcrumbs-bg: #0d1b2f;
+}
+
+#header {
+    box-shadow: 0 14px 32px rgba(7, 17, 31, 0.22);
+}
+
+#branding h1,
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: #ffffff;
+    font-weight: 850;
+}
+
+.admin-subtitle {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.85rem;
+}
+
+.module,
+.inline-group {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+div.breadcrumbs {
+    color: rgba(255, 255, 255, 0.75);
+}

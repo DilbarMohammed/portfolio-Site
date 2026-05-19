@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8 reveal">
+                <p class="eyebrow">Timeline</p>
+                <h1>My background across development, education, and continuous learning</h1>
+                <p>Use this page as a focused resume-style view of the same admin-managed portfolio content.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-5 reveal">
+                <p class="eyebrow">About me</p>
+                <h2 class="section-title">I build practical, polished software with a strong sense of product detail.</h2>
+                <p class="section-copy">{{ portfolio_intro }}</p>
+                <a class="btn btn-primary" href="{% static 'docs/resume.txt' %}" download>
+                    <i class="bi bi-download" aria-hidden="true"></i>
+                    Download Resume
+                </a>
+            </div>
+            <div class="col-lg-7">
+                <div class="timeline compact">
+                    {% for item in experience %}
+                        <article class="timeline-item reveal">
+                            <span class="timeline-dot"></span>
+                            <div class="timeline-card">
+                                <span class="timeline-type">{{ item.get_type_display }}</span>
+                                <h3>{{ item.title }}</h3>
+                                <p class="timeline-meta">{{ item.organization }}{% if item.location %} | {{ item.location }}{% endif %}</p>
+                                <p>{{ item.description }}</p>
+                                <strong>{{ item.period }}{% if item.is_current %} | Current{% endif %}</strong>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad section-muted">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="eyebrow">Skills snapshot</p>
+            <h2>Comfortable across the product stack</h2>
+        </div>
+        <div class="row g-4">
+            {% for category, skills in skills_by_category.items %}
+                <div class="col-lg-4">
+                    <article class="skill-panel reveal">
+                        <h3>{{ category }}</h3>
+                        <div class="skill-list">
+                            {% for skill in skills %}
+                                <div class="skill-item">
+                                    <div class="skill-topline">
+                                        <span><i class="bi {{ skill.icon_class|default:'bi-circle' }}"></i>{{ skill.name }}</span>
+                                        <strong>{{ skill.proficiency }}%</strong>
+                                    </div>
+                                    <div class="progress skill-progress">
+                                        <div class="progress-bar" data-progress="{{ skill.proficiency }}"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

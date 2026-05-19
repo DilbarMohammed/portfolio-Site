@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Portfolio Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Portfolio Admin</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+<span class="admin-subtitle">Projects, skills, experience, and messages</span>
+{% endblock %}
